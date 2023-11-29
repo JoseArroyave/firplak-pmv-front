@@ -15,31 +15,74 @@
     </form>
   </div>
 
+  @if (guias.length > 0) {
   <table class="table">
     <thead>
       <tr>
         <th scope="col">ID Guia</th>
-        <th scope="col">Nombres</th>
-        <th scope="col">Apellidos</th>
+        <th scope="col">Cliente</th>
         <th scope="col">Identificación</th>
-        <th scope="col">Artículo</th>
-        <th scope="col">Cantidad de Unidades</th>
+        <th scope="col">Direccion de entrega</th>
+        <th scope="col">Fecha despacho</th>
+        <th scope="col" colspan="3"></th>
       </tr>
     </thead>
     <tbody>
       @for (guia of guias; track $index) {
       <tr>
         <td>{{guia.id_guia}}</td>
-        <td>{{guia.nombre}}</td>
-        <td>{{guia.apellido}}</td>
+        <td>{{guia.nombre}} {{guia.apellido}}</td>
         <td>{{guia.id_cliente}}</td>
-        <td>{{guia.descripcion}}</td>
-        <td>{{guia.cantidad}}</td>
+        <td>{{guia.direccion_entrega}}</td>
+        <td>{{guia.fecha_despacho}}</td>
+        <td>
+          <button type="button" (click)="setPDO(guia)" style="width: 100%;">Agregar
+            POD</button>
+        </td>
+        <td>
+          <button type="button" (click)="getGuiaPDF(guia)" style="width: 100%;">Ver
+            guía en PDF</button>
+        </td>
+        <td>
+          <button type="button" (click)="getDocumentosPerGuia(guia)" style="width: 100%;">Ver
+            Documentos
+            asociados</button>
+        </td>
       </tr>
       }
     </tbody>
   </table>
 
-  <button type="button">Agregar Fila</button>
-  <button type="button">Enviar Pedidos</button>
+  @if (documentosPerGuide.length != 0) {
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Documento</th>
+        <th scope="col">Producto</th>
+        <th scope="col">Cantidad</th>
+        <th scope="col">Total</th>
+        <th scope="col">Fecha despacho</th>
+        <th scope="col">Fecha entrega</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (documento of documentosPerGuide; track $index) {
+      <tr>
+        <td>{{documento.id_documento_entrega}}</td>
+        <td>{{documento.descripcion}}</td>
+        <td>{{documento.cantidad}}</td>
+        <td>{{documento.cantidad * documento.precio}}</td>
+        <td>{{documento.fecha_despacho}}</td>
+        <td>{{documento.fecha_entrega}}</td>
+        <td>
+          <button type="button" (click)="getDocumentoPDF(documento.id_documento_entrega)" style="width: 100%;">Ver PDF
+            documento</button>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+  }
+  }
 </div>

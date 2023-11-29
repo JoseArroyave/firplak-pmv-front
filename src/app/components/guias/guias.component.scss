@@ -3,7 +3,7 @@
   margin: 50px auto;
 
   table {
-    width: 100%;
+    max-width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
 
@@ -12,6 +12,8 @@
       padding: 10px;
       border: 1px solid #ddd;
       text-align: left;
+      word-wrap: break-word;
+      overflow: hidden;
     }
 
     th {

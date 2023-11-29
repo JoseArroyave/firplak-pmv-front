@@ -1,26 +1,32 @@
 import { ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { GuiasComponentService } from '../../services/guias-component.service';
 import { Component, OnInit, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { Router, RouterLink } from '@angular/router';
 import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-guias',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink],
   templateUrl: './guias.component.html',
   styleUrl: './guias.component.scss'
 })
 export class GuiasComponent implements OnInit {
 
-  private http = inject(HttpClient)
   public guiasForm!: UntypedFormGroup;
+  public route: Router;
 
+  public documentosPerGuide: any[] = [];
+  public guiaActual: string = '';
   public guias: any[] = [];
 
   constructor(
+    private guiasComponentService: GuiasComponentService,
     private formBuilder: UntypedFormBuilder
-  ) { }
+  ) {
+    this.route = inject(Router);
+  }
 
   ngOnInit(): void {
     this.initForms();
@@ -41,11 +47,52 @@ export class GuiasComponent implements OnInit {
         text: "Rellena correctamente"
       });
     } else {
-      this.http.post("http://127.0.0.1:8000/api/guias/getGuiasPerClient", { id_cliente: this.guiasForm.get("id_cliente")?.value }).subscribe((response: any) => {
+      const id_cliente = this.guiasForm.get("id_cliente")?.value;
+      this.guiasComponentService.getGuiasPerClient(id_cliente).subscribe((response: any) => {
+        this.guias = response.message.reduce((resultado: any, objeto: any) => {
+          if (!resultado.some((item: any) => item.id_guia === objeto.id_guia)) {
+            resultado.push(objeto);
+          }
+          return resultado;
+        }, []);
+
         this.guias = response.message;
       })
     }
 
+    this.documentosPerGuide = [];
+    this.guiaActual = '';
+    this.guias = [];
+  }
+
+  getDocumentosPerGuia = (guia: any) => {
+    this.guiaActual = guia.id_guia;
+    this.guiasComponentService.getDocumentosPerGuia(this.guiaActual).subscribe((response: any) => {
+      this.documentosPerGuide = response.message;
+    })
+  }
+
+  getGuiaPDF = (guia: any) => {
+    this.guiaActual = guia.id_guia;
+    this.guiasComponentService.getGuiaPDF(this.guiaActual, guia.id_cliente).subscribe((response: any) => {
+      this.showPdf(response);
+    })
+  }
+
+  getDocumentoPDF = (id_documento: any) => {
+    this.guiasComponentService.getDocumentoPDF(this.guiaActual, id_documento).subscribe((response: any) => {
+      this.showPdf(response);
+    })
+  }
+
+  showPdf = (response: any) => {
+    const blobUrl = URL.createObjectURL(response);
+    window.open(blobUrl, '_blank');
+  }
+
+  setPDO = (guia: any) => {
+    this.guiaActual = guia.id_guia;
+    this.route.navigateByUrl('/POD/' + this.guiaActual);
   }
 
 }
