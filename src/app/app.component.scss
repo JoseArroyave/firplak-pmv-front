@@ -1,0 +1,38 @@
+.navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  background-color: #888888; // Puedes ajustar el color de fondo según tus preferencias
+  border-radius: 15px; // Agrega bordes redondeados
+
+  .navbar-logo {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 15rem;
+
+    img {
+      max-height: 40px; // Ajusta el tamaño de tu logo según sea necesario
+    }
+  }
+
+  .navbar-items {
+    display: flex;
+    align-items: center;
+
+    a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #fff; // Color del texto, ajusta según tu paleta de colores
+      font-weight: bold;
+      transition: color 0.3s ease; // Agrega transición suave al color del texto
+
+      &:hover {
+        text-decoration: underline;
+        color: #f0f0f0; // Cambia el color al pasar el ratón
+      }
+    }
+  }
+}

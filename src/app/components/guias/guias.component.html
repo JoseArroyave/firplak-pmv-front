@@ -1,0 +1,45 @@
+<div class="container">
+
+  <div class="primary-field">
+    <form [formGroup]="guiasForm">
+      <div class="row">
+        <div class="col">
+          <label>Identificación: <b style="color:#ff2c4b">*</b></label><br>
+          <input type="number" formControlName="id_cliente" style="width: 100%;">
+        </div>
+        <div class="col">
+          <label style="color: transparent;">Consultar guías:</label><br>
+          <button type="button" (click)="getGuiasPerClient()" style="width: 100%;">Consultar guías</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID Guia</th>
+        <th scope="col">Nombres</th>
+        <th scope="col">Apellidos</th>
+        <th scope="col">Identificación</th>
+        <th scope="col">Artículo</th>
+        <th scope="col">Cantidad de Unidades</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (guia of guias; track $index) {
+      <tr>
+        <td>{{guia.id_guia}}</td>
+        <td>{{guia.nombre}}</td>
+        <td>{{guia.apellido}}</td>
+        <td>{{guia.id_cliente}}</td>
+        <td>{{guia.descripcion}}</td>
+        <td>{{guia.cantidad}}</td>
+      </tr>
+      }
+    </tbody>
+  </table>
+
+  <button type="button">Agregar Fila</button>
+  <button type="button">Enviar Pedidos</button>
+</div>

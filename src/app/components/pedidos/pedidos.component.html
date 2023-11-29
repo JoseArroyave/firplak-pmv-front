@@ -1,0 +1,53 @@
+<div class="container">
+  <form [formGroup]="pedidosForm">
+
+    <div class="row">
+      <div class="col-sm-4">
+        <label>Nombres: <b style="color:#ff2c4b">*</b></label><br>
+        <input type="text" formControlName="nombre" style="width: 100%;">
+      </div>
+
+      <div class="col-sm-4">
+        <label>Apellidos: <b style="color:#ff2c4b">*</b></label><br>
+        <input type="text" formControlName="apellido" style="width: 100%;">
+      </div>
+
+      <div class="col-sm-4">
+        <label>Identificación: <b style="color:#ff2c4b">*</b></label><br>
+        <input type="number" formControlName="id_cliente" style="width: 100%;">
+      </div>
+    </div>
+
+    @for (item of [].constructor(3); track $index) {
+    <div class="row">
+      <div class="col">
+        <label>Artículo: @if ($index == 0) {<b style="color:#ff2c4b">*</b>}</label>
+        <select (change)="setArticulo($index, $event)" style="width: 100%;">
+          @for (producto of productos; track $index) {
+          <option [value]="producto.SKU">{{producto.descripcion}}</option>
+          }
+        </select>
+      </div>
+      <div class="col">
+        <label>Precio/Unidad: </label><br>
+        <input type="number" disabled [value]="pedidosForm.get('precio'+$index)?.value" style="width: 100%;">
+      </div>
+      <div class="col">
+        <label>Unidades: @if ($index == 0) {<b style="color:#ff2c4b">*</b>}</label><br>
+        <input type="number" formControlName="cantidades{{$index}}" style="width: 100%;">
+      </div>
+      <div class="col">
+        <label>Precio total: </label><br>
+        <input type="number" disabled style="width: 100%;"
+          [value]="pedidosForm.get('precio'+$index)?.value*pedidosForm.get('cantidades'+$index)?.value">
+      </div>
+      <div class="col">
+        <label>Direccion de entrega: @if ($index == 0) {<b style="color:#ff2c4b">*</b>}</label><br>
+        <input type="text" formControlName="direccion{{$index}}" style="width: 100%;">
+      </div>
+    </div>
+    }
+
+    <button type="button" (click)="enviarPedido()">Enviar Pedido</button>
+  </form>
+</div>
