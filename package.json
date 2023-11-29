@@ -7,6 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "jose": "ng serve --host 192.168.2.103 --port 4000",
     "serve:ssr:firplak_front": "node dist/firplak_front/server/server.mjs"
   },
   "private": true,
@@ -22,6 +23,7 @@
     "@angular/router": "^17.0.0",
     "@angular/ssr": "^17.0.3",
     "express": "^4.18.2",
+    "ng-qrcode": "^17.0.0",
     "rxjs": "~7.8.0",
     "sweetalert2": "^11.10.1",
     "tslib": "^2.3.0",
