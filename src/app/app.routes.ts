@@ -5,9 +5,10 @@ import { GuiasComponent } from './components/guias/guias.component';
 import { PodComponent } from './components/pod/pod.component';
 
 export const routes: Routes = [
-  { path: "", component: InicioComponent, title: "Inicio" },
-  { path: "Inicio", component: InicioComponent, title: "Inicio" },
+  // { path: "", component: InicioComponent, title: "Inicio" },
+  // { path: "Inicio", component: InicioComponent, title: "Inicio" },
   { path: "Pedidos", component: PedidosComponent, title: "Pedidos" },
   { path: "Guias", component: GuiasComponent, title: "Guias" },
-  { path: "POD", component: PodComponent, title: "POD" },
+  { path: "POD/:id", component: PodComponent, title: "POD" },
+  { path: "", redirectTo: 'Pedidos', pathMatch: 'full' },
 ];
