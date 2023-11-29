@@ -10,5 +10,6 @@ export const routes: Routes = [
   { path: "Pedidos", component: PedidosComponent, title: "Pedidos" },
   { path: "Guias", component: GuiasComponent, title: "Guias" },
   { path: "POD/:id", component: PodComponent, title: "POD" },
+  { path: "**", redirectTo: 'Pedidos', pathMatch: 'full' },
   { path: "", redirectTo: 'Pedidos', pathMatch: 'full' },
 ];
