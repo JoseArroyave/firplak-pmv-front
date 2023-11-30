@@ -1,9 +1,14 @@
 .container {
+  max-width: 45%;
   margin: 50px auto;
   padding: 20px;
   background-color: #f0f0f0;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+  h1 {
+    text-align: center;
+  }
 
   form {
     display: grid;
@@ -13,6 +18,35 @@
       grid-column: span 12;
 
       margin-bottom: 15px;
+
+      input[type="file"] {
+        grid-column: span 12;
+        margin-bottom: 15px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #fff;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+
+        &:focus {
+          outline: none;
+          border-color: #007bff;
+        }
+
+        &::-webkit-file-upload-button {
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          background-color: #333;
+          color: #fff;
+          cursor: pointer;
+        }
+
+        &::-moz-focus-inner {
+          color: transparent;
+          border: none;
+        }
+      }
 
       label {
         display: block;
@@ -40,6 +74,7 @@
     }
 
     button {
+      height: 135%;
       grid-column: span 12;
       background-color: #333;
       color: #fff;
