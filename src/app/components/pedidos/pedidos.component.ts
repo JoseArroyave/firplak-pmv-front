@@ -106,6 +106,7 @@ export class PedidosComponent implements OnInit {
   addPedido = (pedido: any) => {
     this.requestHTTPService.addPedido(pedido).subscribe((response: any) => {
       Swal.fire({ title: "", text: response.message, icon: "success" });
+      this.pedidosForm.reset();
     })
   }
 
