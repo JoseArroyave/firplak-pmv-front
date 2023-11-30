@@ -3,9 +3,10 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node server.js",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
+    "heroku-postBuild": "ng build --prod",
     "test": "ng test",
     "jose": "ng serve --host 192.168.1.9 --port 4000",
     "serve:ssr:firplak_front": "node dist/firplak_front/server/server.mjs"
@@ -13,8 +14,10 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "^17.0.0",
+    "@angular/cli": "^17.0.3",
     "@angular/common": "^17.0.0",
     "@angular/compiler": "^17.0.0",
+    "@angular/compiler-cli": "^17.0.0",
     "@angular/core": "^17.0.0",
     "@angular/forms": "^17.0.0",
     "@angular/platform-browser": "^17.0.0",
@@ -24,9 +27,11 @@
     "@angular/ssr": "^17.0.3",
     "express": "^4.18.2",
     "ng-qrcode": "^17.0.0",
+    "path": "^0.12.7",
     "rxjs": "~7.8.0",
     "sweetalert2": "^11.10.1",
     "tslib": "^2.3.0",
+    "typescript": "~5.2.2",
     "zone.js": "~0.14.2"
   },
   "devDependencies": {
@@ -43,5 +48,9 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.2.2"
+  },
+  "engines": {
+    "npm": "9.6.7",
+    "node": "18.17.1"
   }
 }
