@@ -24,6 +24,7 @@
         <th scope="col">Identificación</th>
         <th scope="col">Direccion de entrega</th>
         <th scope="col">Fecha despacho</th>
+        <th scope="col">PDO</th>
         <th scope="col" colspan="3"></th>
       </tr>
     </thead>
@@ -36,7 +37,14 @@
         <td>{{guia.direccion_entrega}}</td>
         <td>{{guia.fecha_despacho}}</td>
         <td>
-          <button type="button" (click)="setPDO(guia)" style="width: 100%;">Agregar
+          @if (guia.pod_registered == 1){
+          <i class="fa-solid fa-check" style="color: #2ea043;"></i>
+          }@else{
+          <i class="fa-solid fa-xmark" style="color: #da4a25;"></i>
+          }
+        </td>
+        <td>
+          <button type="button" (click)="setPDO(guia)" style="width: 100%;" [disabled]="guia.pod_registered">Agregar
             POD</button>
         </td>
         <td>

@@ -40,8 +40,19 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
 
-    &:hover {
-      background-color: #555;
+    &:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+
+      &:hover {
+        background-color: #ccc;
+      }
+    }
+
+    &:not(:disabled) {
+      &:hover {
+        background-color: #555;
+      }
     }
 
     &:not(:last-child) {

@@ -38,6 +38,7 @@ export class GuiasComponent implements OnInit {
     });
   }
 
+  /* La función `getGuiasPerClient` se encarga de recuperar las guias (guías) de un cliente específico. */
   getGuiasPerClient = () => {
 
     if (!this.guiasForm.valid) {
@@ -66,6 +67,7 @@ export class GuiasComponent implements OnInit {
     this.guias = [];
   }
 
+  /* La función `getDocumentosPerGuia` es recuperar los documentos asociados a una guía específica. */
   getDocumentosPerGuia = (guia: any) => {
     this.guiaActual = guia.id_guia;
     this.requestHTTPService.getDocumentosPerGuia(this.guiaActual).subscribe((response: any) => {
@@ -73,6 +75,7 @@ export class GuiasComponent implements OnInit {
     })
   }
 
+  /* La función `getGuiaPDF` se encarga de recuperar el archivo PDF asociado a una guía específica. */
   getGuiaPDF = (guia: any) => {
     this.guiaActual = guia.id_guia;
     this.requestHTTPService.getGuiaPDF(this.guiaActual, guia.id_cliente).subscribe((response: any) => {
@@ -80,17 +83,20 @@ export class GuiasComponent implements OnInit {
     })
   }
 
+  /* La función `getDocumentoPDF` se encarga de recuperar el archivo PDF asociado a un documento específico. */
   getDocumentoPDF = (id_documento: any) => {
     this.requestHTTPService.getDocumentoPDF(this.guiaActual, id_documento).subscribe((response: any) => {
       this.showPdf(response);
     })
   }
 
+  /* La función `showPdf` es responsable de mostrar un archivo PDF en una nueva pestaña del navegador. */
   showPdf = (response: any) => {
     const blobUrl = URL.createObjectURL(response);
     window.open(blobUrl, '_blank');
   }
 
+  /* La función `setPDO` se utiliza para configurar la guía actual y navegar a una ruta específica. */
   setPDO = (guia: any) => {
     this.guiaActual = guia.id_guia;
     this.route.navigateByUrl('/POD/' + this.guiaActual);
