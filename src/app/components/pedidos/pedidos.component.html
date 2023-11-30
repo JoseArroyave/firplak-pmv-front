@@ -34,7 +34,7 @@
       </div>
       <div class="col">
         <label>Unidades: @if ($index == 0) {<b style="color:#ff2c4b">*</b>}</label><br>
-        <input type="number" formControlName="cantidades{{$index}}" style="width: 100%;">
+        <input type="number" formControlName="cantidades{{$index}}" style="width: 100%;" min="0">
       </div>
       <div class="col">
         <label>Precio total: </label><br>
