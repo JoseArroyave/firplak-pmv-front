@@ -3,6 +3,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import Swal from 'sweetalert2';
+import { GuiasComponentService } from '../../services/guias-component.service';
 
 @Component({
   selector: 'app-pedidos',
@@ -26,6 +27,7 @@ export class PedidosComponent implements OnInit {
   };
 
   constructor(
+    private guiasComponentService: GuiasComponentService,
     private formBuilder: UntypedFormBuilder,
   ) { }
 
@@ -59,7 +61,7 @@ export class PedidosComponent implements OnInit {
   }
 
   getProductos = () => {
-    this.http.get("http://192.168.2.103:8000/api/productos/getProductos").subscribe((response: any) => {
+    this.guiasComponentService.getProductos().subscribe((response: any) => {
       this.productos = [{ SKU: '', descripcion: '', dias_fabricacion: '', precio: '', tipo_producto: '' }];
       response.message.forEach((each: any) => {
         this.productos.push({ SKU: each.SKU, descripcion: each.descripcion, dias_fabricacion: each.dias_fabricacion, precio: each.precio, tipo_producto: each.tipo_producto });
@@ -100,7 +102,7 @@ export class PedidosComponent implements OnInit {
   }
 
   addPedido = (pedido: any) => {
-    this.http.post("http://192.168.2.103:8000/api/pedidos/addPedido", pedido).subscribe((response: any) => {
+    this.guiasComponentService.addPedido(pedido).subscribe((response: any) => {
       Swal.fire({
         title: "",
         text: response.message,
