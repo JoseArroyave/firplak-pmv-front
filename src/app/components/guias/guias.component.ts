@@ -1,5 +1,5 @@
 import { ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { GuiasComponentService } from '../../services/guias-component.service';
+import { RequestHTTPService } from '../../services/requestHTTP-component.service';
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
@@ -22,7 +22,7 @@ export class GuiasComponent implements OnInit {
   public guias: any[] = [];
 
   constructor(
-    private guiasComponentService: GuiasComponentService,
+    private requestHTTPService: RequestHTTPService,
     private formBuilder: UntypedFormBuilder
   ) {
     this.route = inject(Router);
@@ -44,7 +44,7 @@ export class GuiasComponent implements OnInit {
       Swal.fire({ icon: "error", title: "", text: "Rellena correctamente" });
     } else {
       const id_cliente = this.guiasForm.get("id_cliente")?.value;
-      this.guiasComponentService.getGuiasPerClient(id_cliente).subscribe((response: any) => {
+      this.requestHTTPService.getGuiasPerClient(id_cliente).subscribe((response: any) => {
 
         if (response.message.length > 0) {
           this.guias = response.message.reduce((resultado: any, objeto: any) => {
@@ -68,20 +68,20 @@ export class GuiasComponent implements OnInit {
 
   getDocumentosPerGuia = (guia: any) => {
     this.guiaActual = guia.id_guia;
-    this.guiasComponentService.getDocumentosPerGuia(this.guiaActual).subscribe((response: any) => {
+    this.requestHTTPService.getDocumentosPerGuia(this.guiaActual).subscribe((response: any) => {
       this.documentosPerGuide = response.message;
     })
   }
 
   getGuiaPDF = (guia: any) => {
     this.guiaActual = guia.id_guia;
-    this.guiasComponentService.getGuiaPDF(this.guiaActual, guia.id_cliente).subscribe((response: any) => {
+    this.requestHTTPService.getGuiaPDF(this.guiaActual, guia.id_cliente).subscribe((response: any) => {
       this.showPdf(response);
     })
   }
 
   getDocumentoPDF = (id_documento: any) => {
-    this.guiasComponentService.getDocumentoPDF(this.guiaActual, id_documento).subscribe((response: any) => {
+    this.requestHTTPService.getDocumentoPDF(this.guiaActual, id_documento).subscribe((response: any) => {
       this.showPdf(response);
     })
   }

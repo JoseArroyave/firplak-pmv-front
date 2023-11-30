@@ -1,4 +1,5 @@
 import { ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { RequestHTTPService } from '../../services/requestHTTP-component.service';
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import Swal from 'sweetalert2';
@@ -17,6 +18,7 @@ export class PodComponent {
 
   constructor(
     private formBuilder: UntypedFormBuilder,
+    private requestHTTPService: RequestHTTPService,
   ) { }
 
   ngOnInit(): void {
@@ -32,8 +34,10 @@ export class PodComponent {
 
   savePDO = () => {
     if (this.podForm.valid) {
-      Swal.fire({ title: "", text: "POD guardado correctamente", icon: "success" });
-      this.podForm.reset();
+      this.requestHTTPService.savePDO(this.podForm.value).subscribe((response: any) => {
+        Swal.fire({ title: "", text: "POD guardado correctamente", icon: "success" });
+        this.podForm.reset();
+      })
     } else {
       Swal.fire({ title: "", text: "Ingresa los datos", icon: "error" });
     }

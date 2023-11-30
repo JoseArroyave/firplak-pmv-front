@@ -1,11 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { environment } from './../environment';
+import { environment } from '../environment';
 
 @Injectable({
   providedIn: 'root'
 })
-export class GuiasComponentService {
+export class RequestHTTPService {
 
   private http = inject(HttpClient)
   private url = `${environment.apiUrl}`;
@@ -34,6 +34,10 @@ export class GuiasComponentService {
 
   public addPedido = (pedido: any) => {
     return this.http.post(`${this.url}pedidos/addPedido`, pedido);
+  }
+
+  public savePDO = (pdo: any) => {
+    return this.http.post(`${this.url}pdo/savePDO`, pdo);
   }
 
 }
