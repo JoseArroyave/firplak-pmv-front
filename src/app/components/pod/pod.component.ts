@@ -32,18 +32,10 @@ export class PodComponent {
 
   savePDO = () => {
     if (this.podForm.valid) {
-      Swal.fire({
-        title: "",
-        text: "POD guardado correctamente",
-        icon: "success"
-      });
+      Swal.fire({ title: "", text: "POD guardado correctamente", icon: "success" });
       this.podForm.reset();
     } else {
-      Swal.fire({
-        title: "",
-        text: "Ingresa los datos",
-        icon: "error"
-      });
+      Swal.fire({ title: "", text: "Ingresa los datos", icon: "error" });
     }
   }
 

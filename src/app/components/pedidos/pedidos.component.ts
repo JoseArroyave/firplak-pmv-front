@@ -72,11 +72,7 @@ export class PedidosComponent implements OnInit {
   enviarPedido = () => {
 
     if (!this.pedidosForm.valid) {
-      Swal.fire({
-        icon: "error",
-        title: "",
-        text: "Rellena correctamente el pedido"
-      });
+      Swal.fire({ icon: "error", title: "", text: "Rellena correctamente el pedido" });
     } else {
 
       const productos = [];
@@ -103,11 +99,7 @@ export class PedidosComponent implements OnInit {
 
   addPedido = (pedido: any) => {
     this.guiasComponentService.addPedido(pedido).subscribe((response: any) => {
-      Swal.fire({
-        title: "",
-        text: response.message,
-        icon: "success"
-      });
+      Swal.fire({ title: "", text: response.message, icon: "success" });
     })
   }
 
