@@ -33,7 +33,7 @@ export class GuiasComponentService {
   }
 
   public addPedido = (pedido: any) => {
-    return this.http.post("http://192.168.1.9:8000/api/pedidos/addPedido", pedido);
+    return this.http.post(`${this.url}pedidos/addPedido`, pedido);
   }
 
 }
