@@ -6,7 +6,7 @@
     "start": "node server.js",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "heroku-postbuild": "ng build --prod",
+    "heroku-postbuild": "ng build --configuration production",
     "test": "ng test",
     "jose": "ng serve --host 192.168.1.9 --port 4000",
     "serve:ssr:firplak_front": "node dist/firplak_front/server/server.mjs"
