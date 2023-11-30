@@ -1,13 +1,13 @@
 <div class="container">
-  <h1>Entrega de POD</h1>
+  <h1>Entrega de POD <br> <span style="font-size: 50%;">{{guiaActual}}</span></h1>
   <form [formGroup]="podForm">
     <div class="form-group">
       <label for="comprobante">Comprobante firmado de guía de envío <b style="color:#ff2c4b">*</b></label>
-      <input type="file" accept=".pdf, .jpg, .png" formControlName="guia">
+      <input type="file" accept=".pdf, .jpg, .png" formControlName="guia_archivo">
     </div>
     <div class="form-group">
       <label for="documentos">Comprobantes firmados de documentos de entrega <b style="color:#ff2c4b">*</b></label>
-      <input type="file" multiple accept=".pdf, .jpg, .png" formControlName="documentos">
+      <input type="file" multiple accept=".pdf, .jpg, .png" formControlName="documentos_archivo">
     </div>
     <button (click)="savePOD()">Enviar</button>
   </form>

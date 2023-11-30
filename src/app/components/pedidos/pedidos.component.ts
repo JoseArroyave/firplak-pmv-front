@@ -60,6 +60,8 @@ export class PedidosComponent implements OnInit {
     });
   }
 
+  /* La función `getProductos` está realizando una solicitud HTTP al método `getProductos` del servicio
+  `requestHTTPService`. Se suscribe a la respuesta y asigna los datos recibidos al array `productos`. */
   getProductos = () => {
     this.requestHTTPService.getProductos().subscribe((response: any) => {
       this.productos = [{ SKU: '', descripcion: '', dias_fabricacion: '', precio: '', tipo_producto: '' }];
@@ -69,6 +71,7 @@ export class PedidosComponent implements OnInit {
     })
   }
 
+  /* La función `enviarPedido` se encarga de manejar la lógica cuando el usuario hace clic en el botón "Enviar Pedido". */
   enviarPedido = () => {
 
     if (!this.pedidosForm.valid) {
@@ -97,12 +100,19 @@ export class PedidosComponent implements OnInit {
 
   }
 
+  /* La función `addPedido` está realizando una solicitud HTTP al método `addPedido` del servicio
+  `requestHTTPService`. Se suscribe a la respuesta y muestra un mensaje de éxito utilizando el método
+  `Swal.fire` de la biblioteca SweetAlert2. */
   addPedido = (pedido: any) => {
     this.requestHTTPService.addPedido(pedido).subscribe((response: any) => {
       Swal.fire({ title: "", text: response.message, icon: "success" });
     })
   }
 
+  /* La función `setArticulo` es un método que se llama cuando el usuario selecciona un artículo de un
+  menú desplegable en la interfaz de usuario. Toma dos parámetros: `index`, que representa el índice
+  del artículo seleccionado en el formulario, y `evento`, que representa el objeto de evento
+  desencadenado por la selección. */
   setArticulo = (index: number, evento: any) => {
     const precio = this.productos.filter((each: any) => each.SKU == evento.target.value)[0].precio;
     this.pedidosForm.get(`SKU${index}`)?.setValue(evento.target.value);
