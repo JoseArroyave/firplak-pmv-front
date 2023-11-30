@@ -36,8 +36,8 @@ export class RequestHTTPService {
     return this.http.post(`${this.url}pedidos/addPedido`, pedido);
   }
 
-  public savePOD = (pdo: any) => {
-    return this.http.post(`${this.url}pdo/savePOD`, pdo);
+  public savePOD = (pod: any) => {
+    return this.http.post(`${this.url}pod/savePOD`, pod);
   }
 
 }
