@@ -32,9 +32,9 @@ export class PodComponent {
     });
   }
 
-  savePDO = () => {
+  savePOD = () => {
     if (this.podForm.valid) {
-      this.requestHTTPService.savePDO(this.podForm.value).subscribe((response: any) => {
+      this.requestHTTPService.savePOD(this.podForm.value).subscribe((response: any) => {
         Swal.fire({ title: "", text: "POD guardado correctamente", icon: "success" });
         this.podForm.reset();
       })
